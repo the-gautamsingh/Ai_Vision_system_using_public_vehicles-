@@ -1,0 +1,34 @@
+{
+  "name": "urban-intelligence",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host",
+    "server": "node server/index.js",
+    "dev:full": "concurrently \"npm run server\" \"npm run dev\"",
+    "build": "vite build",
+    "preview": "vite preview --host"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.0.6",
+    "concurrently": "^9.1.2",
+    "leaflet": "^1.9.4",
+    "lucide-react": "^0.475.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-leaflet": "^4.2.1",
+    "recharts": "^2.12.7",
+    "tailwindcss": "^4.0.6"
+  },
+  "devDependencies": {
+    "@types/leaflet": "^1.9.12",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react-swc": "^3.7.0",
+    "autoprefixer": "^10.4.20",
+    "browserslist": "^4.23.0",
+    "postcss": "^8.4.49",
+    "vite": "^5.4.1"
+  }
+}

@@ -1,0 +1,265 @@
+@import "tailwindcss";
+
+/* ═══════════════════════════════════════════════════════════════════════
+   CSS CUSTOM PROPERTIES  —  light default, dark override
+   All component colours reference these variables so a single
+   data-theme attribute on <html> flips the whole app instantly.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+:root,
+[data-theme="light"] {
+  /* backgrounds */
+  --bg-page:        #f1f5f9;   /* app shell */
+  --bg-card:        #ffffff;   /* cards / panels */
+  --bg-card-alt:    #f8fafc;   /* inner panel / table header */
+  --bg-sidebar:     #ffffff;
+  --bg-header:      #ffffff;
+  --bg-input:       #f8fafc;
+  --bg-badge:       #f1f5f9;
+  --bg-overlay:     rgba(15,23,42,0.55);
+
+  /* text */
+  --text-primary:   #0f172a;
+  --text-secondary: #475569;
+  --text-muted:     #94a3b8;
+  --text-inverted:  #ffffff;
+
+  /* borders */
+  --border:         #e2e8f0;
+  --border-strong:  #cbd5e1;
+
+  /* brand accents (unchanged in both themes) */
+  --accent-green:   #16a34a;
+  --accent-green-bg:#dcfce7;
+  --accent-green-border:#bbf7d0;
+  --accent-orange:  #ea580c;
+  --accent-orange-bg:#fff7ed;
+  --accent-orange-border:#fed7aa;
+
+  /* sidebar header gradient */
+  --sidebar-grad-from: #16a34a;
+  --sidebar-grad-to:   #15803d;
+
+  /* demo banner */
+  --banner-bg:      #16a34a;
+  --banner-text:    #ffffff;
+
+  /* scrollbar */
+  --scroll-track:   #f1f5f9;
+  --scroll-thumb:   #cbd5e1;
+  --scroll-thumb-h: #16a34a;
+
+  /* chart tooltip */
+  --tooltip-bg:     #ffffff;
+  --tooltip-border: #e2e8f0;
+  --tooltip-text:   #0f172a;
+
+  /* shadow */
+  --shadow-sm:  0 1px 3px rgba(0,0,0,.08);
+  --shadow-md:  0 4px 12px rgba(0,0,0,.10);
+}
+
+[data-theme="dark"] {
+  /* backgrounds */
+  --bg-page:        #0b0f14;
+  --bg-card:        #11161d;
+  --bg-card-alt:    #151b23;
+  --bg-sidebar:     #11161d;
+  --bg-header:      #11161d;
+  --bg-input:       #151b23;
+  --bg-badge:       #1e2a35;
+  --bg-overlay:     rgba(0,0,0,0.70);
+
+  /* text */
+  --text-primary:   #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted:     #475569;
+  --text-inverted:  #0f172a;
+
+  /* borders */
+  --border:         #26313d;
+  --border-strong:  #334155;
+
+  /* brand accents */
+  --accent-green:   #22c55e;
+  --accent-green-bg:#052e16;
+  --accent-green-border:#166534;
+  --accent-orange:  #fb923c;
+  --accent-orange-bg:#431407;
+  --accent-orange-border:#9a3412;
+
+  /* sidebar header gradient */
+  --sidebar-grad-from: #052e16;
+  --sidebar-grad-to:   #14532d;
+
+  /* demo banner */
+  --banner-bg:      #0b0f14;
+  --banner-text:    #94a3b8;
+
+  /* scrollbar */
+  --scroll-track:   #0b0f14;
+  --scroll-thumb:   #26313d;
+  --scroll-thumb-h: #22c55e;
+
+  /* chart tooltip */
+  --tooltip-bg:     #151b23;
+  --tooltip-border: #26313d;
+  --tooltip-text:   #f1f5f9;
+
+  /* shadow */
+  --shadow-sm:  0 1px 4px rgba(0,0,0,.40);
+  --shadow-md:  0 4px 16px rgba(0,0,0,.50);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   BASE STYLES
+   ═══════════════════════════════════════════════════════════════════════ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   THEME-AWARE UTILITY CLASSES
+   Use these instead of hardcoded Tailwind bg-* / text-* where the
+   colour must flip between light and dark mode.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* backgrounds */
+.bg-page      { background-color: var(--bg-page) !important; }
+.bg-card      { background-color: var(--bg-card) !important; }
+.bg-card-alt  { background-color: var(--bg-card-alt) !important; }
+.bg-sidebar   { background-color: var(--bg-sidebar) !important; }
+.bg-header    { background-color: var(--bg-header) !important; }
+.bg-input     { background-color: var(--bg-input) !important; }
+
+/* text */
+.text-primary   { color: var(--text-primary) !important; }
+.text-secondary { color: var(--text-secondary) !important; }
+.text-muted     { color: var(--text-muted) !important; }
+
+/* borders */
+.border-theme        { border-color: var(--border) !important; }
+.border-theme-strong { border-color: var(--border-strong) !important; }
+
+/* cards */
+.card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-sm);
+  transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.2s ease;
+}
+.card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-strong);
+}
+
+/* inputs */
+.input-theme {
+  background-color: var(--bg-input);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  transition: border-color 0.2s;
+}
+.input-theme:focus {
+  outline: none;
+  border-color: var(--accent-green);
+}
+.input-theme::placeholder { color: var(--text-muted); }
+
+/* table rows */
+.tr-theme {
+  border-bottom: 1px solid var(--border);
+  transition: background-color 0.15s;
+}
+.tr-theme:hover { background-color: var(--bg-card-alt); }
+
+/* smooth transitions on interactive elements */
+.theme-transition {
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease,
+    box-shadow 0.2s ease;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   SCROLLBAR
+   ═══════════════════════════════════════════════════════════════════════ */
+
+::-webkit-scrollbar              { width: 6px; height: 6px; }
+::-webkit-scrollbar-track        { background: var(--scroll-track); }
+::-webkit-scrollbar-thumb        { background: var(--scroll-thumb); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover  { background: var(--scroll-thumb-h); }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   LEAFLET MAP
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  border-radius: 0.75rem;
+  font-family: 'Inter', sans-serif !important;
+  background-color: var(--bg-card-alt) !important;
+}
+
+.leaflet-popup-content-wrapper {
+  background-color: var(--bg-card) !important;
+  color: var(--text-primary) !important;
+  border-radius: 0.75rem !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: var(--shadow-md) !important;
+  padding: 4px !important;
+}
+.leaflet-popup-tip    { background-color: var(--bg-card) !important; }
+.leaflet-popup-content {
+  margin: 10px 14px !important;
+  line-height: 1.5 !important;
+  color: var(--text-primary) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   RECHARTS TOOLTIP  — forced to theme colours
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.recharts-tooltip-wrapper .recharts-default-tooltip {
+  background-color: var(--tooltip-bg) !important;
+  border: 1px solid var(--tooltip-border) !important;
+  color: var(--tooltip-text) !important;
+  border-radius: 10px !important;
+  font-size: 11px !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   ANIMATIONS
+   ═══════════════════════════════════════════════════════════════════════ */
+
+@keyframes radar-pulse {
+  0%   { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(22,163,74,.7); }
+  70%  { transform: scale(1);    box-shadow: 0 0 0 8px rgba(22,163,74,0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(22,163,74,0); }
+}
+.radar-live { animation: radar-pulse 2s infinite; }
+
+@keyframes green-glow {
+  0%, 100% { box-shadow: 0 0 8px rgba(22,163,74,.3); }
+  50%       { box-shadow: 0 0 16px rgba(22,163,74,.6); }
+}
+.glow-green { animation: green-glow 3s infinite ease-in-out; }
